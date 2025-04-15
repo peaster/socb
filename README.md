@@ -49,26 +49,32 @@ The overall score is a weighted combination of the three main hardware component
 
 ### CPU Score (40% of total)
 - Based solely on floating-point operations per second (FLOPS)
-- Score = 1000 × (Measured FLOPS ÷ Reference FLOPS)
+- $S_c = 1000 × (F_m / F_r)$, where
+  - $F_m$ and $F_r$ are measured and reference FLOPS respectively. 
+  - $S_c$ is the aggregate CPU Score
 
 ### Memory Score (35% of total)
 - Weighted combination of read and write bandwidth:
   - 60% from read bandwidth performance
   - 40% from write bandwidth performance
-- Score = 1000 × [(Read ratio × 0.6) + (Write ratio × 0.4)]
+- $S_m = 1000 × [(R_r × 0.6) + (R_w × 0.4)]$, where
+  - $R_r$ and $R_w$ are read and write ratios respectively
+  - $S_m$ is the aggregate memory performance score
 
 ### Disk Score (25% of total)
 - Weighted combination of three I/O metrics:
   - 40% from sequential read throughput
   - 30% from sequential write throughput
   - 30% from random access IOPS
-- Score = 1000 × [(Read ratio × 0.4) + (Write ratio × 0.3) + (IOPS ratio × 0.3)]
-
+- $S_d = 1000 × [(Read ratio × 0.4) + (Write ratio × 0.3) + (IOPS ratio × 0.3)]$
+  - $R_r$ and $R_w$ are read and write ratios respectively
+  - $R_i$ is the input/output operations per second (IOPS) ratio
+  - $S_d$ is the aggregate disk performance score
 ## 4. Overall Score Calculation
 
 The final benchmark score is calculated as:
 
-Overall Score = (CPU Score × 0.4) + (Memory Score × 0.35) + (Disk Score × 0.25)
+Overall Score = $(S_c × 0.4) + (S_m × 0.35) + (S_d × 0.25)$
 
 This methodology enables fair comparison between different hardware configurations, with higher scores indicating better performance relative to the reference system. The multi-threaded approach ensures the benchmark effectively utilizes modern multi-core processors for more realistic measurements.
 
