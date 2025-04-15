@@ -35,6 +35,8 @@ A score of 1000 in any component means the system performs at exactly the refere
   - SATA SSDs from this era commonly delivered sequential read/write speeds of 550/520 MB/s
   - Random 4K IOPS in the 5,000-10,000 range
 
+  Additionally, configuration values for multithreading are set for the reference system by default.
+
 ## 2. Component Weighting
 
 The overall score is a weighted combination of the three main hardware components:
