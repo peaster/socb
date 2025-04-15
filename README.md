@@ -5,9 +5,9 @@ This benchmark is designed to be a simple measure of an LLM's ability to make pe
 - The modified benchmark source.
 - The user prompt containing the base source and the hardware specification
 
-Total performance of this benchmark is calculated as a percentage of the absolute values of each performance run.
+Total performance of this benchmark is calculated as difference in absolute values of each performance run.
 
-- $(Modified / Base) = R_p$, where $R_p$ is the ratio of performance increase or decrease in a system created by the LLM modified code.
+- $(Modified / Base) × 100 = R_p$, where $R_p$ is the ratio of performance increase or decrease in a system created by the LLM modified code.
 
 
 # Running the test
@@ -18,11 +18,11 @@ gcc -o base_benchmark benchmark.c -lm -lpthread -O2
 ./base_benchmark
 ```
 2) With the LLM you wish to test, use the provided [system prompt](./SYSTEM_PROMPT.md) and in the user prompt: 
-  > Optimize the following C source code for my specific hardware: [paste your hardware details here]
+  "Based on my specific hardware: [paste your hardware details here], optimize the following C source code [paste full base benchmark.c]"
 
   These hardware specs can easily be identified on Linux through `sudo lshw -C processor,memory,disk,storage`. Tweaking this part of the input may yield better or worse SOC-B performance
 
-3) Copy the source it produces onto your machine, run the GCC command it provides you, and run the modified benchmark. 
+3) Copy the source it produces onto your machine, run the GCC command it provides you, and run the modified benchmark. If the source does not compile, feed the whole GCC command and error back into the model's context and let the model try again. If it can not correct the code within five iterations, the model fails the SOC-B test and receives a score of 0.
 
 4) Calculate your SOC-B score based on the formula below
 
