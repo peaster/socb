@@ -1,2 +1,0 @@
-System,Date,OverallScore,CPUScore,MFLOPS,MemoryScore,ReadBandwidth,WriteBandwidth,DiskScore,ReadThroughput,WriteThroughput,IOPS
-athena,2025-04-15 15:32:29,15506,13,66.49,1040,12510.48,5792.30,60549,7337.89,236.24,908359.17
