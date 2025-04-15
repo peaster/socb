@@ -2,9 +2,13 @@
 This benchmark is designed to be a simple measure of an LLM's ability to make performance improvements to C source code for a specific hardware configuration. The benchmark contains three components:
 - The [base benchmark source](./base/benchmark.c)
 - The [system prompt](./SYSTEM_PROMPT.md). This serves as a control so that all models performing inference for this task have the same working environment for inputs.
-- The modified benchmark source. Use the provided system prompt 
+- The modified benchmark source.
 
-# Base Benchmark Scoring Methodology Explained
+Total performance of this benchmark is calculated as a percentage of the absolute values of each performance run.
+
+- $(Modified / Base) = R_p$, where $R_p$ is the ratio of performance increase or decrease in a system created by the LLM modified code.
+
+# Base Benchmark Scoring Methodology
 
 The base benchmark employs a comprehensive scoring system to evaluate hardware performance across three major components. It is loosely based on GeekBench's scoring mechanism. Here's how it works:
 
