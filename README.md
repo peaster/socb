@@ -1,12 +1,30 @@
 # Self-Optimizing Code Benchmark (SOC-B)
-This benchmark is designed to be a simple measure of an LLM's ability to make performance improvements to C source code for a specific hardware configuration. The benchmark contains three components:
+This benchmark is designed to be a simple measure of an LLM's ability to make performance improvements to C source code for a specific hardware configuration. The benchmark contains four components:
 - The [base benchmark source](./base/benchmark.c)
 - The [system prompt](./SYSTEM_PROMPT.md). This serves as a control so that all models performing inference for this task have the same working environment for inputs.
 - The modified benchmark source.
+- The user prompt containing the base source and the hardware specification
 
 Total performance of this benchmark is calculated as a percentage of the absolute values of each performance run.
 
 - $(Modified / Base) = R_p$, where $R_p$ is the ratio of performance increase or decrease in a system created by the LLM modified code.
+
+
+# Running the test
+1) Compile the base benchmark and run it for your specific hardware
+```bash
+cd base/
+gcc -o base_benchmark benchmark.c -lm -lpthread -O2
+./base_benchmark
+```
+2) With the LLM you wish to test, use the provided [system prompt](./SYSTEM_PROMPT.md) and in the user prompt: 
+  > Optimize the following C source code for my specific hardware: [paste your hardware details here]
+
+  These hardware specs can easily be identified on Linux through `sudo lshw -C processor,memory,disk,storage`. Tweaking this part of the input may yield better or worse SOC-B performance
+
+3) Copy the source it produces onto your machine, run the GCC command it provides you, and run the modified benchmark. 
+
+4) Calculate your SOC-B score based on the formula below
 
 # Base Benchmark Scoring Methodology
 
